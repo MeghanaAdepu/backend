@@ -4,10 +4,22 @@ const cors = require('cors')
 const UserModel = require('./models/Users')
 
 const app=express();
-app.use(cors())
 app.use(express.json())
+app.use(cors({
+    origin:'*' ,
+    credentials: true// Replace with your actual frontend URL
+}));
 
-mongoose.connect("mongodb://127.0.0.1:27017/crud")
+
+mongoose.connect("mongodb://localhost:27017/crud", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Successfully connected to MongoDB");
+}).catch((error) => {
+    console.error("Connection error", error);
+});
+
 
 app.get('/',(req,res)=>{
     UserModel.find({})
@@ -120,6 +132,6 @@ app.delete('/deleteuser/:idno', async (req, res) => {
 });
 
 
-app.listen(3001,()=>{
+app.listen(process.env.PORT || 3001,()=>{
     console.log("Server is running")
 })
