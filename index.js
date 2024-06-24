@@ -12,8 +12,6 @@ app.use(cors({
 
 
 mongoose.connect("mongodb://localhost:27017/crud", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
 }).then(() => {
     console.log("Successfully connected to MongoDB");
 }).catch((error) => {
