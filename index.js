@@ -12,7 +12,7 @@ app.use(cors({
 }));
 
 
-mongoose.connect("mongodb://localhost:27017/crud", {
+mongoose.connect(process.env.dburi, {
 }).then(() => {
     console.log("Successfully connected to MongoDB");
 }).catch((error) => {
