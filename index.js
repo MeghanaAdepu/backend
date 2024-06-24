@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path');
 const UserModel = require('./models/Users')
 
 const app=express();
@@ -18,7 +19,7 @@ mongoose.connect("mongodb://localhost:27017/crud", {
     console.error("Connection error", error);
 });
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/',(req,res)=>{
     UserModel.find({})
     .then(users=>res.json(users))
